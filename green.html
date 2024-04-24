@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+    <!-- Replace the content tag with appropriate information -->
+    <meta name="description" content="Radiology Report Generation Metric">
+    <meta property="og:title" content="GREEN"/>
+    <meta property="og:description" content="GREEN: Generative Radiology Report Evaluation and Error Notation"/>
+    <meta property="og:url" content="URL OF THE WEBSITE"/>
+    <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+    <meta property="og:image" content=""/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+
+
+    <meta name="twitter:title" content="GREEN">
+    <meta name="twitter:description" content="GREEN: Generative Radiology Report Evaluation and Error Notation">
+    <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+    <meta name="twitter:image" content="src/static-chexagent/images/your_twitter_banner_image.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- Keywords for your paper to be indexed by-->
+    <meta name="keywords" content="Radiology Report Generation, LLM, Evaluation">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>GREEN: Generative Radiology Report Evaluation and Error Notation</title>
+    <link rel="icon" type="image/x-icon" href="src/static-chexagent/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="src/static-chexagent/css/bulma.min.css">
+    <link rel="stylesheet" href="src/static-chexagent/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="src/static-chexagent/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="src/static-chexagent/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="src/static-chexagent/css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+    <script defer src="src/static-chexagent/js/fontawesome.all.min.js"></script>
+    <script src="src/static-chexagent/js/bulma-carousel.min.js"></script>
+    <script src="src/static-chexagent/js/bulma-slider.min.js"></script>
+    <script src="src/static-chexagent/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h1 class="title is-1 publication-title">CheXagent: Towards a Foundation Model for Chest X-Ray Interpretation</h1>
+                    <div class="is-size-5 publication-authors">
+                        <!-- Paper authors -->
+                        <span class="author-block"><a href="https://zhjohnchan.github.io/" target="_blank">Zhihong Chen</a><sup>*</sup>,</span>
+                        <span class="author-block"><a href="https://maya-varma.com/" target="_blank">Maya Varma</a><sup>*</sup>,</span>
+                        <span class="author-block"><a href="https://jbdel.github.io/" target="_blank">Jean-Benoit Delbrouck</a><sup>*</sup>,</span>
+                        <span class="author-block"><a href="https://profiles.stanford.edu/magdalini-paschali" target="_blank">Magdalini Paschali</a>,</span>
+                        <span class="author-block"><a href="https://scholar.google.com/citations?user=Rsz3iJAAAAAJ&hl=en" target="_blank">Louis Blankemeier</a>,</span>
+                        <span class="author-block"><a href="https://davevanveen.com/" target="_blank">Dave Van Veen</a>,</span>
+                        <span class="author-block"><a href="https://jeya-maria-jose.github.io/research/" target="_blank">Jeya Maria Jose Valanarasu</a>,</span>
+                        <span class="author-block"><a href="https://profiles.stanford.edu/alaa-youssef" target="_blank">Alaa Youssef</a>,</span>
+                        <span class="author-block"><a href="https://josephpcohen.com/w/" target="_blank">Joseph Paul Cohen</a>,</span>
+                        <span class="author-block"><a href="https://aimi.stanford.edu/people/eduardo-pontes-reis" target="_blank">Eduardo Pontes Reis</a>,</span>
+                        <span class="author-block"><a href="https://profiles.stanford.edu/emily-tsai" target="_blank">Emily B. Tsai</a>,</span>
+                        <span class="author-block"><a href="https://med.stanford.edu/xray/CR/AndrewJohnstonMD.html" target="_blank">Andrew Johnston</a>,</span>
+                        <span class="author-block"><a href="https://med.stanford.edu/xray/CR/CameronOlsenMD.html" target="_blank">Cameron Olsen</a>,</span>
+                        <span class="author-block"><a href="https://www.tanishq.ai/" target="_blank">Tanishq Mathew Abraham</a>,</span>
+                        <span class="author-block"><a href="https://med.stanford.edu/profiles/sergios-gatidis" target="_blank">Sergios Gatidis</a>,</span>
+                        <span class="author-block"><a href="https://profiles.stanford.edu/akshay-chaudhari" target="_blank">Akshay S. Chaudhari</a>,</span>
+                        <span class="author-block"><a href="https://profiles.stanford.edu/curtis-langlotz" target="_blank">Curtis Langlotz</a></span>
+                    </div>
+
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block"><sup>1</sup>Stanford University, <sup>2</sup>Stability AI<br>2024</span>
+                        <span class="eql-cntrb"><small><br><sup>*</sup>Equal Contribution</small></span>
+                    </div>
+
+                    <div class="column has-text-centered">
+                        <div class="publication-links">
+                            <!-- ArXiv abstract Link -->
+                            <span class="link-block">
+                                <a href="https://arxiv.org/abs/2401.12208" target="_blank"
+                                   class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="ai ai-arxiv"></i>
+                                    </span>
+                                    <span>arXiv</span>
+                                </a>
+                            </span>
+
+                            <!-- Github link -->
+                            <span class="link-block">
+                                <a href="https://github.com/Stanford-AIMI/CheXagent" target="_blank"
+                                   class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fab fa-github"></i>
+                                    </span>
+                                    <span>Code</span>
+                                </a>
+                            </span>
+
+                            <!-- HuggingFace link -->
+                            <span class="link-block">
+                                <a href="https://huggingface.co/StanfordAIMI/CheXagent-8b" target="_blank"
+                                   class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fas fa-smile"></i>
+                                    </span>
+                                    <span>HuggingFace</span>
+                                </a>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Teaser video-->
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video poster="" id="tree" autoplay controls muted loop height="100%">
+        <!-- Your video here -->
+        <source src="src/static-chexagent/videos/demo_chexagent.mov"
+        type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+          A simple video demonstrates the report generation task and CheXagent can do other tasks related to chest X-rays. Please refer to our paper for more details.
+      </h2>
+    </div>
+  </div>
+</section>
+<!-- End teaser video -->
+
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Abstract</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        Chest X-rays (CXRs) are the most frequently performed imaging test in clinical practice. Recent advances in the development of vision-language foundation models (FMs) give rise to the possibility of performing automated CXR interpretation, which can assist physicians with clinical decision-making and improve patient outcomes. However, developing FMs that can accurately interpret CXRs is challenging due to the (1) limited availability of large-scale vision-language datasets in the medical image domain, (2) lack of vision and language encoders that can capture the complexities of medical data, and (3) absence of evaluation frameworks for benchmarking the abilities of FMs on CXR interpretation. In this work, we address these challenges by first introducing CheXinstruct - a large-scale instruction-tuning dataset curated from 28 publicly-available datasets. We then present CheXagent - an instruction-tuned FM capable of analyzing and summarizing CXRs. To build CheXagent, we design a clinical large language model (LLM) for parsing radiology reports, a vision encoder for representing CXR images, and a network to bridge the vision and language modalities. Finally, we introduce CheXbench - a novel benchmark designed to systematically evaluate FMs across 8 clinically-relevant CXR interpretation tasks. Extensive quantitative evaluations and qualitative reviews with five expert radiologists demonstrate that CheXagent outperforms previously-developed general- and medical-domain FMs on CheXbench tasks. Furthermore, in an effort to improve model transparency, we perform a fairness evaluation across factors of sex, race and age to highlight potential performance disparities. The figure below shows the overview of the proposed pipeline.
+                    </p>
+                    <figure>
+                        <img src="src/static-chexagent/images/overview.jpg" alt="Overview" class="center-image blend-img-background">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- CheXinstruct -->
+<script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.14.0/gradio.js"></script>
+<section class="section hero">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Data: CheXinstruct</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        We introduce CheXinstruct - a large-scale instruction-tuning dataset curated from 28 publicly-available datasets. The figure below shows the collection of datasets and tasks comprising CheXinstruct.
+                    </p>
+                    <figure>
+                        <img src="src/static-chexagent/images/chexinstruct.jpg" alt="CheXinstruct" class="center-image blend-img-background">
+                    </figure>
+                    <p>
+                        You can explore the samples of CheXinstruct in the following demo, where three samples are shown for each task.
+                    </p>
+                    <gradio-app space="https://stanfordaimi-chexinstruct.hf.space" eager="true"></gradio-app>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End CheXinstruct -->
+
+<!-- CheXbench -->
+<script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.14.0/gradio.js"></script>
+<section class="section hero is-light">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Model: CheXagent</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        We then present CheXagent - an instruction-tuned FM capable of analyzing and summarizing CXRs. The figure below shows the four-stage training process of CheXagent, starting from adapting a general LLM for clinical use, through training a CXR vision encoder and a vision-language bridger, to the final stage of instruction tuning on diverse CXR tasks.
+                    </p>
+                    <figure>
+                        <img src="src/static-chexagent/images/chexagent.png" alt="CheXbench" class="center-image blend-img-background">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End CheXbench -->
+
+<!-- CheXbench -->
+<script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.14.0/gradio.js"></script>
+<section class="section hero">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Evaluation: CheXbench</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        We introduce CheXbench - a novel benchmark designed to systematically evaluate FMs across 8 clinically-relevant CXR interpretation tasks. The following table shows the results of CheXbench for tasks associated with image perception comparing CheXagent with general domain and medical domain FMs on several CXR datasets. For each task, we report accuracy.
+                    </p>
+                    <figure>
+                        <img src="src/static-chexagent/images/chexbench.png" alt="CheXbench" class="center-image blend-img-background">
+                    </figure>
+                    <p>
+                        We shows results from automated evaluations using GPT-4 for findings generation. The figure below shows the results of GPT-4 evaluations, which demonstrates that the reports generated by CheXagent outperform medical-domain FMs for the findings generation task on MIMIC-CXR.
+                    </p>
+                    <figure>
+                        <img src="src/static-chexagent/images/gpt4_evaluation.jpg" alt="CheXbench" class="center-image blend-img-background">
+                    </figure>
+                    <p>
+                        We conduct a reader study in which five radiologists compare text generated by CheXagent against text written by a physician. The figure below shows the corresponding results.
+                    </p>
+                    <figure>
+                        <img src="src/static-chexagent/images/human_evaluation.png" alt="CheXbench" class="center-image blend-img-background">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End CheXbench -->
+
+
+<!-- CheXbench -->
+<script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.14.0/gradio.js"></script>
+<section class="section hero is-light">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Fairness Evaluation</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        Furthermore, in an effort to improve model transparency, we perform a fairness evaluation across factors of sex, race and age to highlight potential performance disparities. The figure below shows the performance of CheXagent subgroup performance on cardiomegaly classification investigating potential model biases. F1 Scores vary across sex, racial groups, and age categories.
+                    </p>
+                    <figure>
+                        <img src="src/static-chexagent/images/fairness_evaluation.png" alt="CheXbench" class="center-image blend-img-background">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End CheXbench -->
+
+
+<!--BibTex citation -->
+<section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+        <h2 class="title">BibTeX</h2>
+        <pre><code>@article{stanford-aimi-chexagent-2024,
+    title={CheXagent: Towards a Foundation Model for Chest X-Ray Interpretation},
+    author={Chen, Zhihong and Varma, Maya and Delbrouck, Jean-Benoit and Paschali, Magdalini and Blankemeier, Louis and Veen, Dave Van and Valanarasu, Jeya Maria Jose and Youssef, Alaa and Cohen, Joseph Paul and Reis, Eduardo Pontes and Tsai, Emily B. and Johnston, Andrew and Olsen, Cameron and Abraham, Tanishq Mathew and Gatidis, Sergios and Chaudhari, Akshay S and Langlotz, Curtis},
+    journal={arXiv preprint arXiv:2401.12208},
+    url={https://arxiv.org/abs/2401.12208},
+    year={2024}
+}</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="content">
+                    <p>
+                        Last update: 2024/01. Template credited to <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
