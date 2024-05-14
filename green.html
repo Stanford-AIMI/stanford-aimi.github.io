@@ -50,23 +50,23 @@
         <div class="container is-max-desktop">
             <div class="columns is-centered">
                 <div class="column has-text-centered">
-                    <h1 class="title is-1 publication-title">CheXagent: Towards a Foundation Model for Chest X-Ray Interpretation</h1>
+                    <h1 class="title is-1 publication-title">GREEN: Generative Radiology Report Evaluation and Error Notation</h1>
                     <div class="is-size-5 publication-authors">
                         <!-- Paper authors -->
-                        <span class="author-block"><a href="https://zhjohnchan.github.io/" target="_blank">Sophie Ostmeier</a><sup>*</sup>,</span>
-                        <span class="author-block"><a href="https://github.com/justin13601" target="_blank">Justin Xu</a><sup>*</sup>,</span>
-                        <span class="author-block"><a href="https://zhjohnchan.github.io/" target="_blank">Zhihong Chen</a><sup>*</sup>,</span>
-                        <span class="author-block"><a href="https://maya-varma.com/" target="_blank">Maya Varma</a><sup>*</sup>,</span>
+                        <span class="author-block"><a href="https://zhjohnchan.github.io/" target="_blank">Sophie Ostmeier</a><sup></sup>,</span>
+                        <span class="author-block"><a href="https://github.com/justin13601" target="_blank">Justin Xu</a><sup></sup>,</span>
+                        <span class="author-block"><a href="https://zhjohnchan.github.io/" target="_blank">Zhihong Chen</a><sup></sup>,</span>
+                        <span class="author-block"><a href="https://maya-varma.com/" target="_blank">Maya Varma</a><sup></sup>,</span>
                         <span class="author-block"><a href="https://scholar.google.com/citations?user=Rsz3iJAAAAAJ&hl=en" target="_blank">Louis Blankemeier</a>,</span>
                         <span class="author-block"><a href="https://profiles.stanford.edu/michael-moseley" target="_blank">Michael Moseley</a>,</span>
                         <span class="author-block"><a href="https://profiles.stanford.edu/curtis-langlotz" target="_blank">Curtis Langlotz</a></span>
-                        <span class="author-block"><a href="https://profiles.stanford.edu/akshay-chaudhari" target="_blank">Akshay S. Chaudhari</a>,</span>
+                        <span class="author-block"><a href="https://profiles.stanford.edu/akshay-chaudhari" target="_blank">Akshay S. Chaudhari</a><sup>*</sup>,</span>
                         <span class="author-block"><a href="https://jbdel.github.io/" target="_blank">Jean-Benoit Delbrouck</a><sup>*</sup>,</span>
 
                     </div>
 
                     <div class="is-size-5 publication-authors">
-                        <span class="author-block"><sup>1</sup>Stanford University, <sup>2</sup>Stability AI<br>2024</span>
+                        <span class="author-block">Stanford University, <br>May 2024</span>
                         <span class="eql-cntrb"><small><br><sup>*</sup>Equal Contribution</small></span>
                     </div>
 
@@ -74,7 +74,7 @@
                         <div class="publication-links">
                             <!-- ArXiv abstract Link -->
                             <span class="link-block">
-                                <a href="https://arxiv.org/abs/2401.12208" target="_blank"
+                                <a href="https://arxiv.org/pdf/2405.03595" target="_blank"
                                    class="external-link button is-normal is-rounded is-dark">
                                     <span class="icon">
                                         <i class="ai ai-arxiv"></i>
@@ -114,24 +114,6 @@
 </section>
 
 
-<!-- Teaser video-->
-<!--<section class="hero teaser">
-  <div class="container is-max-desktop">
-    <div class="hero-body">
-      <video poster="" id="tree" autoplay controls muted loop height="100%">
-        <!-- Your video here -->
-        <!--<source src="src/static-chexagent/videos/demo_chexagent.mov"
-        type="video/mp4">
-      </video>
-      <h2 class="subtitle has-text-centered">
-          A simple video demonstrates the report generation task and CheXagent can do other tasks related to chest X-rays. Please refer to our paper for more details.
-      </h2>
-    </div>
-  </div>
-</section> 
-<!-- End teaser video -->
-
-
 <!-- Paper abstract -->
 <section class="section hero is-light">
     <div class="container is-max-desktop">
@@ -140,9 +122,9 @@
                 <h2 class="title is-3">Abstract</h2>
                 <div class="content has-text-justified">
                     <p>
-                        Evaluating radiology reports is a challenging problem as factual correctness is extremely important due to its medical nature. Existing automatic evaluation metrics either suffer from failing to consider factual correctness (e.g., BLEU and ROUGE) or are limited in their interpretability (e.g., F1CheXpert and F1RadGraph). In this paper, we introduce GREEN (Generative Radiology Report Evaluation and Error Notation), a radiology report generation metric that leverages the natural language understanding of language models to identify and explain clinically significant errors in candidate reports, both quantitatively and qualitatively. Compared to current metrics, GREEN offers: 1) a score aligned with expert preferences, 2) human interpretable explanations of clinically significant errors, enabling feedback loops with end-users, and 3) a lightweight open-source method that reaches the performance of commercial counterparts. We validate our GREEN metric by comparing it to GPT-4, as well as to error counts of 6 experts and preferences of 2 experts. Our method demonstrates not only higher correlation with expert error counts, but simultaneously higher alignment with expert preferences when compared to previous approaches                    </p>
+                        Evaluating radiology reports is a challenging problem as factual correctness is extremely important due to its medical nature. Existing automatic evaluation metrics either suffer from failing to consider factual correctness (e.g., BLEU and ROUGE) or are limited in their interpretability (e.g., F1CheXpert and F1RadGraph). In this paper, we introduce GREEN (Generative Radiology Report Evaluation and Error Notation), a radiology report generation metric that leverages the natural language understanding of language models to identify and explain clinically significant errors in candidate reports, both quantitatively and qualitatively. Compared to current metrics, GREEN offers a score aligned with expert preferences, human interpretable explanations of clinically significant errors, enabling feedback loops with end-users, and  a lightweight open-source method that reaches the performance of commercial counterparts. We validate our GREEN metric by comparing it to GPT-4, as well as to error counts of 6 experts and preferences of 2 experts. Our method demonstrates not only higher correlation with expert error counts, but simultaneously higher alignment with expert preferences when compared to previous approaches.</p>
                     <figure>
-                        <img src="src/static-chexagent/images/overview.jpg" alt="Overview" class="center-image blend-img-background">
+                        <img src="static-green/images/motivation.png" alt="Overview" class="center-image blend-img-background">
                     </figure>
                 </div>
             </div>
@@ -157,18 +139,17 @@
     <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
             <div class="column is-four-fifths">
-                <h2 class="title is-3">Data: CheXinstruct</h2>
+                <h2 class="title is-3">Metric</h2>
                 <div class="content has-text-justified">
                     <p>
-                        We introduce CheXinstruct - a large-scale instruction-tuning dataset curated from 28 publicly-available datasets. The figure below shows the collection of datasets and tasks comprising CheXinstruct.
+                        We are introducing a novel metric named GREEN (Generative Radiology Evaluation and Error Notation), designed to assess the quality of radiology reports produced by machine learning models. Leveraging the advanced natural language understanding capabilities of large language models, GREEN accurately identifies and elucidates clinically significant discrepancies between reference and generated reports. This metric generates <br><br>
+                        1) a detailed score ranging from 0 to 1 for quantitative analysis,<br>
+                        2) a comprehensive summary for qualitative analysis. <br><br>
+                        Such interpretable evaluation make GREEN an tool for providing user feedback and enhancing the quality of automated radiology reporting. 
                     </p>
                     <figure>
-                        <img src="src/static-chexagent/images/chexinstruct.jpg" alt="CheXinstruct" class="center-image blend-img-background">
+                        <img src="static-green/images/summary.png" alt="CheXinstruct" class="center-image blend-img-background">
                     </figure>
-                    <p>
-                        You can explore the samples of CheXinstruct in the following demo, where three samples are shown for each task.
-                    </p>
-                    <gradio-app space="https://stanfordaimi-chexinstruct.hf.space" eager="true"></gradio-app>
                 </div>
             </div>
         </div>
@@ -182,13 +163,13 @@
     <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
             <div class="column is-four-fifths">
-                <h2 class="title is-3">Model: CheXagent</h2>
+                <h2 class="title is-3">Development</h2>
                 <div class="content has-text-justified">
                     <p>
-                        We then present CheXagent - an instruction-tuned FM capable of analyzing and summarizing CXRs. The figure below shows the four-stage training process of CheXagent, starting from adapting a general LLM for clinical use, through training a CXR vision encoder and a vision-language bridger, to the final stage of instruction tuning on diverse CXR tasks.
+                        To build our training dataset, we compiled 100,000 pairs of reference and generated candidate radiology reports from six chest X-ray datasets. These datasets include MIMIC-CXR, MIMIC-PRO, CandidPTX, PadChest, BIMCV-covid19, and OpenI, with generation guided by GPT-4 to highlight differences in predefined clinical categories. Pairing strategies ranged from random matching to semantic similarity and RadGraph permutations, ensuring diversity with 174,329 unique reports. We further pre-trained models with medical text datasets including MIMIC-IV Radiology and Discharge Summaries, MIMIC-CXR reports, PubMed content, Wiki Medical Terms, and Medical Guidelines. We than train a variety of opensource large language models on our training set to outerperform previous approaches in quantitatively and qualitatively.
                     </p>
                     <figure>
-                        <img src="src/static-chexagent/images/chexagent.png" alt="CheXbench" class="center-image blend-img-background">
+                        <img src="static-green/images/training.png" alt="CheXbench" class="center-image blend-img-background">
                     </figure>
                 </div>
             </div>
@@ -203,25 +184,19 @@
     <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
             <div class="column is-four-fifths">
-                <h2 class="title is-3">Evaluation: CheXbench</h2>
+                <h2 class="title is-3">Validation</h2>
                 <div class="content has-text-justified">
                     <p>
-                        We introduce CheXbench - a novel benchmark designed to systematically evaluate FMs across 8 clinically-relevant CXR interpretation tasks. The following table shows the results of CheXbench for tasks associated with image perception comparing CheXagent with general domain and medical domain FMs on several CXR datasets. For each task, we report accuracy.
+                        Our validation shows that the GREEN score closely approximates the error assessment of an average radiologist, with a significant error difference of 1.54, nearly matching GPT-4's performance. With that GREEN also approaches the average inter-expert difference, indicating high fidelity in error evaluation. Comparative analysis of metrics revealed that both versions of GREEN exhibit stronger correlations with total radiologist error counts than conventional metrics, markedly outperforming the BertScore and RadGraph.
                     </p>
                     <figure>
-                        <img src="src/static-chexagent/images/chexbench.png" alt="CheXbench" class="center-image blend-img-background">
+                        <img src="static-green/images/eval.png" alt="CheXbench" class="center-image blend-img-background">
                     </figure>
                     <p>
-                        We shows results from automated evaluations using GPT-4 for findings generation. The figure below shows the results of GPT-4 evaluations, which demonstrates that the reports generated by CheXagent outperform medical-domain FMs for the findings generation task on MIMIC-CXR.
+                        Additionally, GREEN error counts achieved a correlation coefficient of 0.79, demonstrating superior performance compared to other metrics, including GPT-4 based models. This robust correlation, along with high expert preference alignment, highlights GREEN's efficacy and potential as a interpretable tool for medical report evaluation.
                     </p>
                     <figure>
-                        <img src="src/static-chexagent/images/gpt4_evaluation.jpg" alt="CheXbench" class="center-image blend-img-background">
-                    </figure>
-                    <p>
-                        We conduct a reader study in which five radiologists compare text generated by CheXagent against text written by a physician. The figure below shows the corresponding results.
-                    </p>
-                    <figure>
-                        <img src="src/static-chexagent/images/human_evaluation.png" alt="CheXbench" class="center-image blend-img-background">
+                        <img src="static-green/images/preferences.png" alt="CheXbench" class="center-image blend-img-background">
                     </figure>
                 </div>
             </div>
@@ -229,41 +204,18 @@
     </div>
 </section>
 <!-- End CheXbench -->
-
-
-<!-- CheXbench -->
-<script type="module" src="https://gradio.s3-us-west-2.amazonaws.com/4.14.0/gradio.js"></script>
-<section class="section hero is-light">
-    <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-            <div class="column is-four-fifths">
-                <h2 class="title is-3">Fairness Evaluation</h2>
-                <div class="content has-text-justified">
-                    <p>
-                        Furthermore, in an effort to improve model transparency, we perform a fairness evaluation across factors of sex, race and age to highlight potential performance disparities. The figure below shows the performance of CheXagent subgroup performance on cardiomegaly classification investigating potential model biases. F1 Scores vary across sex, racial groups, and age categories.
-                    </p>
-                    <figure>
-                        <img src="src/static-chexagent/images/fairness_evaluation.png" alt="CheXbench" class="center-image blend-img-background">
-                    </figure>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End CheXbench -->
-
 
 <!--BibTex citation -->
 <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
         <h2 class="title">BibTeX</h2>
-        <pre><code>@article{stanford-aimi-chexagent-2024,
-    title={CheXagent: Towards a Foundation Model for Chest X-Ray Interpretation},
-    author={Chen, Zhihong and Varma, Maya and Delbrouck, Jean-Benoit and Paschali, Magdalini and Blankemeier, Louis and Veen, Dave Van and Valanarasu, Jeya Maria Jose and Youssef, Alaa and Cohen, Joseph Paul and Reis, Eduardo Pontes and Tsai, Emily B. and Johnston, Andrew and Olsen, Cameron and Abraham, Tanishq Mathew and Gatidis, Sergios and Chaudhari, Akshay S and Langlotz, Curtis},
-    journal={arXiv preprint arXiv:2401.12208},
-    url={https://arxiv.org/abs/2401.12208},
-    year={2024}
-}</code></pre>
+        <pre><code>@article{ostmeier2024green,
+            title={GREEN: Generative Radiology Report Evaluation and Error Notation},
+            author={Ostmeier, Sophie and Xu, Justin and Chen, Zhihong and Varma, Maya and Blankemeier, Louis and Bluethgen, Christian and Michalson, Arne Edward and Moseley, Michael and Langlotz, Curtis and Chaudhari, Akshay S and others},
+            journal={arXiv preprint arXiv:2405.03595},
+            year={2024}
+          }
+</code></pre>
     </div>
 </section>
 <!--End BibTex citation -->
@@ -275,7 +227,7 @@
             <div class="column is-8">
                 <div class="content">
                     <p>
-                        Last update: 2024/01. Template credited to <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.
+                        Last update: 2024/05. Template credited to <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.
                     </p>
                 </div>
             </div>
