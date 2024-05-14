@@ -17,7 +17,6 @@
     <meta name="twitter:title" content="GREEN">
     <meta name="twitter:description" content="GREEN: Generative Radiology Report Evaluation and Error Notation">
     <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
-    <meta name="twitter:image" content="src/static-chexagent/images/your_twitter_banner_image.png">
     <meta name="twitter:card" content="summary_large_image">
     <!-- Keywords for your paper to be indexed by-->
     <meta name="keywords" content="Radiology Report Generation, LLM, Evaluation">
@@ -124,7 +123,7 @@
                     <p>
                         Evaluating radiology reports is a challenging problem as factual correctness is extremely important due to its medical nature. Existing automatic evaluation metrics either suffer from failing to consider factual correctness (e.g., BLEU and ROUGE) or are limited in their interpretability (e.g., F1CheXpert and F1RadGraph). In this paper, we introduce GREEN (Generative Radiology Report Evaluation and Error Notation), a radiology report generation metric that leverages the natural language understanding of language models to identify and explain clinically significant errors in candidate reports, both quantitatively and qualitatively. Compared to current metrics, GREEN offers a score aligned with expert preferences, human interpretable explanations of clinically significant errors, enabling feedback loops with end-users, and  a lightweight open-source method that reaches the performance of commercial counterparts. We validate our GREEN metric by comparing it to GPT-4, as well as to error counts of 6 experts and preferences of 2 experts. Our method demonstrates not only higher correlation with expert error counts, but simultaneously higher alignment with expert preferences when compared to previous approaches.</p>
                     <figure>
-                        <img src="static-green/images/motivation.png" alt="Overview" class="center-image blend-img-background">
+                        <img src="src/static-green/images/motivation.png" alt="Overview" class="center-image blend-img-background">
                     </figure>
                 </div>
             </div>
@@ -148,7 +147,7 @@
                         Such interpretable evaluation make GREEN an tool for providing user feedback and enhancing the quality of automated radiology reporting. 
                     </p>
                     <figure>
-                        <img src="static-green/images/summary.png" alt="CheXinstruct" class="center-image blend-img-background">
+                        <img src="src/static-green/images/summary.png" alt="CheXinstruct" class="center-image blend-img-background">
                     </figure>
                 </div>
             </div>
@@ -169,7 +168,7 @@
                         To build our training dataset, we compiled 100,000 pairs of reference and generated candidate radiology reports from six chest X-ray datasets. These datasets include MIMIC-CXR, MIMIC-PRO, CandidPTX, PadChest, BIMCV-covid19, and OpenI, with generation guided by GPT-4 to highlight differences in predefined clinical categories. Pairing strategies ranged from random matching to semantic similarity and RadGraph permutations, ensuring diversity with 174,329 unique reports. We further pre-trained models with medical text datasets including MIMIC-IV Radiology and Discharge Summaries, MIMIC-CXR reports, PubMed content, Wiki Medical Terms, and Medical Guidelines. We than train a variety of opensource large language models on our training set to outerperform previous approaches in quantitatively and qualitatively.
                     </p>
                     <figure>
-                        <img src="static-green/images/training.png" alt="CheXbench" class="center-image blend-img-background">
+                        <img src="src/static-green/images/training.png" alt="CheXbench" class="center-image blend-img-background">
                     </figure>
                 </div>
             </div>
@@ -190,13 +189,13 @@
                         Our validation shows that the GREEN score closely approximates the error assessment of an average radiologist, with a significant error difference of 1.54, nearly matching GPT-4's performance. With that GREEN also approaches the average inter-expert difference, indicating high fidelity in error evaluation. Comparative analysis of metrics revealed that both versions of GREEN exhibit stronger correlations with total radiologist error counts than conventional metrics, markedly outperforming the BertScore and RadGraph.
                     </p>
                     <figure>
-                        <img src="static-green/images/eval.png" alt="CheXbench" class="center-image blend-img-background">
+                        <img src="src/static-green/images/eval.png" alt="CheXbench" class="center-image blend-img-background">
                     </figure>
                     <p>
                         Additionally, GREEN error counts achieved a correlation coefficient of 0.79, demonstrating superior performance compared to other metrics, including GPT-4 based models. This robust correlation, along with high expert preference alignment, highlights GREEN's efficacy and potential as a interpretable tool for medical report evaluation.
                     </p>
                     <figure>
-                        <img src="static-green/images/preferences.png" alt="CheXbench" class="center-image blend-img-background">
+                        <img src="src/static-green/images/preferences.png" alt="CheXbench" class="center-image blend-img-background">
                     </figure>
                 </div>
             </div>
