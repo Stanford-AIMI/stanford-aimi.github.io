@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+    <!-- Replace the content tag with appropriate information -->
+    <meta name="description" content="Automated Structured Report Generation">
+    <meta property="og:title" content="SRRG"/>
+    <meta property="og:description" content="SRRG: Automated Structured Report Generation"/>
+    <meta property="og:url" content="URL OF THE WEBSITE"/>
+    <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+    <meta property="og:image" content=""/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="630"/>
+
+
+    <meta name="twitter:title" content="SRRG">
+    <meta name="twitter:description" content="Automated Structured Report Generation">
+    <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- Keywords for your paper to be indexed by-->
+    <meta name="keywords" content="Radiology Report Generation, LLM, Evaluation">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <title>GREEN: Generative Radiology Report Evaluation and Error Notation</title>
+    <link rel="icon" type="image/x-icon" href="src/static-chexagent/images/favicon.png">
+    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+    <link rel="stylesheet" href="src/static-chexagent/css/bulma.min.css">
+    <link rel="stylesheet" href="src/static-chexagent/css/bulma-carousel.min.css">
+    <link rel="stylesheet" href="src/static-chexagent/css/bulma-slider.min.css">
+    <link rel="stylesheet" href="src/static-chexagent/css/fontawesome.all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <link rel="stylesheet" href="src/static-chexagent/css/index.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+    <script defer src="src/static-chexagent/js/fontawesome.all.min.js"></script>
+    <script src="src/static-chexagent/js/bulma-carousel.min.js"></script>
+    <script src="src/static-chexagent/js/bulma-slider.min.js"></script>
+    <script src="src/static-chexagent/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+            <div class="columns is-centered">
+                <div class="column has-text-centered">
+                    <h1 class="title is-1 publication-title">Automated Structured Report Generation</h1>
+                    <div class="is-size-5 publication-authors">
+                        <!-- Paper authors -->
+    <!-- Paper authors -->
+<span class="author-block"><a href="https://jbdel.github.io/" target="_blank">Jean-Benoit Delbrouck</a><sup>♠♥</sup>,</span>
+<span class="author-block"><a href="https://github.com/justin13601" target="_blank">Justin Xu</a><sup>♠</sup>,</span>
+<span class="author-block"><a href="" target="_blank">Johannes Moll</a><sup>♠</sup>,</span>
+<span class="author-block"><a href="" target="_blank">Alois Thomas</a><sup>♠</sup>,</span>
+<span class="author-block"><a href="https://zhjohnchan.github.io/" target="_blank">Zhihong Chen</a><sup>♠</sup>,</span>
+<span class="author-block"><a href="https://scholar.google.com/citations?user=Q2SCA-sAAAAJ&hl=en" target="_blank">Sophie Ostmeier</a><sup>♠</sup>,</span>
+<span class="author-block"><a href="" target="_blank">Asfandyar Azhar</a><sup>♠</sup>,</span>
+<span class="author-block"><a href="" target="_blank">Kelvin Zhenghao Li</a><sup>♠</sup>,</span>
+<span class="author-block"><a href="" target="_blank">Andrew Johnston</a><sup>♠</sup>,</span>
+<span class="author-block"><a href="" target="_blank">Eduardo Reis</a><sup>♠</sup>,</span>
+<span class="author-block"><a href="https://scholar.google.ch/citations?user=ao8Yld4AAAAJ&hl=de" target="_blank">Christian Bluethgen</a><sup>♠</sup>,</span>
+<span class="author-block"><a href="" target="_blank">Mohamed Muneer</a><sup>♠</sup>,</span>
+<span class="author-block"><a href="https://maya-varma.com/" target="_blank">Maya Varma</a><sup>♠</sup>,</span>
+<span class="author-block"><a href="https://profiles.stanford.edu/curtis-langlotz" target="_blank">Curtis Langlotz</a><sup>♠</sup></span>
+
+                    </div>
+
+                    <div class="is-size-5 publication-authors">
+                        <span class="author-block"><sup>♠</sup>Stanford AIMI &nbsp;&nbsp;|&nbsp;&nbsp; <sup>♥</sup>HOPPR</span>
+                    </div>
+
+                    <div class="column has-text-centered">
+                        <div class="publication-links">
+                            <!-- ArXiv abstract Link -->
+                            <span class="link-block">
+                                <a href="" target="_blank"
+                                   class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="ai ai-arxiv"></i>
+                                    </span>
+                                    <span>arXiv</span>
+                                </a>
+                            </span>
+
+                            <!-- Github link -->
+                            <span class="link-block">
+                                <a href="" target="_blank"
+                                   class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fab fa-github"></i>
+                                    </span>
+                                    <span>Code</span>
+                                </a>
+                            </span>
+
+                            <!-- HuggingFace link -->
+                            <span class="link-block">
+                                <a href="https://huggingface.co/collections/StanfordAIMI/structured-radiology-reports-6700962eed728b791126e500" target="_blank"
+                                   class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fas fa-smile"></i>
+                                    </span>
+                                    <span>HuggingFace</span>
+                                </a>
+                            </span>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- Paper abstract -->
+<section class="section hero is-light">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Abstract</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        Automated radiology report generation from chest X-ray (CXR) images has the potential to improve clinical efficiency and reduce radiologists' workload. However, most datasets, including the publicly available MIMIC-CXR and CheXpert Plus, consist entirely of free-form reports, which are inherently variable and unstructured. This variability poses challenges for both generation and evaluation: existing models struggle to produce consistent, clinically meaningful reports, and standard evaluation metrics fail to capture the nuances of radiological interpretation. To address this, we introduce Structured Radiology Report Generation (SRRG), a new task that reformulates free-text radiology reports into a standardized format, ensuring clarity, consistency, and structured clinical reporting. We create a novel dataset by restructuring reports using large language models (LLMs) following strict structured reporting desiderata. Additionally, we introduce SRR-BERT, a fine-grained disease classification model trained on 55 labels, enabling more precise and clinically informed evaluation of structured reports. To assess report quality, we propose F1-SRR-BERT, a metric that leverages SRR-BERT’s hierarchical disease taxonomy to bridge the gap between free-text variability and structured clinical reporting. We validate our dataset through a reader study conducted by five board-certified radiologists and extensive benchmarking experiments.
+                        <figure>
+                        <img src="src/static-srrg/srrg_main.jpg" width="100%" alt="Overview" class="center-image blend-img-background">
+                    </figure>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End paper abstract -->
+
+<!-- CheXinstruct -->
+<section class="section hero">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">Report Generation</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        <table style="width:100%; border-collapse: collapse; text-align: left; font-family: Arial, sans-serif;">
+                            <thead style="background-color: #cce5ff;">
+                              <tr>
+                                <th style="padding: 10px; border-bottom: 2px solid #999;">Model Family</th>
+                                <th style="padding: 10px; border-bottom: 2px solid #999;">Dataset Variant</th>
+                                <th style="padding: 10px; border-bottom: 2px solid #999;">Model</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <!-- CheXagent -->
+                              <tr>
+                                <td rowspan="2" style="padding: 10px; font-weight: bold; vertical-align: middle;">CheXagent</td>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/datasets/StanfordAIMI/srrg_impression" target="_blank">
+                                    SRRG-Impression
+                                  </a>
+                                </td>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/StanfordAIMI/CheXagent-2-3b-srrg-impression" target="_blank">
+                                    🤗 StanfordAIMI/CheXagent-2-3b-srrg-impression
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/datasets/StanfordAIMI/srrg_findings_impression" target="_blank">
+                                    SRRG-Findings
+                                  </a>
+                                </td>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/StanfordAIMI/CheXagent-2-3b-srrg-findings" target="_blank">
+                                    🤗 StanfordAIMI/CheXagent-2-3b-srrg-findings
+                                  </a>
+                                </td>
+                              </tr>
+                          
+                              <!-- CheXpert-Plus -->
+                              <tr>
+                                <td rowspan="2" style="padding: 10px; font-weight: bold; vertical-align: middle;">CheXpert-Plus</td>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/datasets/StanfordAIMI/srrg_impression" target="_blank">
+                                    SRRG-Impression
+                                  </a>
+                                </td>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/StanfordAIMI/chexpert-plus-srrg_impression" target="_blank">
+                                    🤗 StanfordAIMI/chexpert-plus-srrg_impression
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/datasets/StanfordAIMI/srrg_findings_impression" target="_blank">
+                                    SRRG-Findings
+                                  </a>
+                                </td>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/StanfordAIMI/chexpert-plus-srrg_findings" target="_blank">
+                                    🤗 StanfordAIMI/chexpert-plus-srrg_findings
+                                  </a>
+                                </td>
+                              </tr>
+                          
+                              <!-- MAIRA-2 -->
+                              <tr>
+                                <td rowspan="2" style="padding: 10px; font-weight: bold; vertical-align: middle;">MAIRA-2</td>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/datasets/StanfordAIMI/srrg_impression" target="_blank">
+                                    SRRG-Impression
+                                  </a>
+                                </td>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/StanfordAIMI/maira2-srrg-impression" target="_blank">
+                                    🤗 StanfordAIMI/maira2-srrg-impression
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/datasets/StanfordAIMI/srrg_findings_impression" target="_blank">
+                                    SRRG-Findings
+                                  </a>
+                                </td>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/StanfordAIMI/maira2-srrg-findings" target="_blank">
+                                    🤗 StanfordAIMI/maira2-srrg-findings
+                                  </a>
+                                </td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End CheXinstruct -->
+
+<!-- CheXbench -->
+<section class="section hero">
+    <div class="container is-max-desktop">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+                <h2 class="title is-3">F1-SRR-BERT</h2>
+                <div class="content has-text-justified">
+                    <p>
+                        <table style="width:100%; border-collapse: collapse; text-align: left; font-family: Arial, sans-serif;">
+                            <thead style="background-color: #cce5ff;">
+                              <tr>
+                                <th style="padding: 10px; border-bottom: 2px solid #999;">Model</th>
+                                <th style="padding: 10px; border-bottom: 2px solid #999;"># Classes</th>
+                                <th style="padding: 10px; border-bottom: 2px solid #999;">Weighted Scores (P / R / F1 / Support)</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/StanfordAIMI/SRR-BERT-Leaves" target="_blank">
+                                    🤗 StanfordAIMI/SRR-BERT-Leaves
+                                  </a>
+                                </td>
+                                <td style="padding: 10px;">54</td>
+                                <td style="padding: 10px;">0.91 / 0.92 / 0.91 / 178,303</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/StanfordAIMI/SRR-BERT-Upper" target="_blank">
+                                    🤗 StanfordAIMI/SRR-BERT-Upper
+                                  </a>
+                                </td>
+                                <td style="padding: 10px;">24</td>
+                                <td style="padding: 10px;">0.92 / 0.92 / 0.92 / 169,849</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/StanfordAIMI/SRR-BERT-Leaves-with-Statuses" target="_blank">
+                                    🤗 StanfordAIMI/SRR-BERT-Leaves-with-Statuses
+                                  </a>
+                                </td>
+                                <td style="padding: 10px;">162</td>
+                                <td style="padding: 10px;">0.89 / 0.88 / 0.88 / 178,346</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/StanfordAIMI/SRR-BERT-Upper-with-Statuses" target="_blank">
+                                    🤗 StanfordAIMI/SRR-BERT-Upper-with-Statuses
+                                  </a>
+                                </td>
+                                <td style="padding: 10px;">72</td>
+                                <td style="padding: 10px;">0.89 / 0.88 / 0.88 / 168,454</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                          
+                          
+                          <table style="width:100%; border-collapse: collapse; text-align: left; font-family: Arial, sans-serif;">
+                            <thead style="background-color: #cce5ff;">
+                              <tr>
+                                <th style="padding: 10px; border-bottom: 2px solid #999;">Dataset</th>
+                                <th style="padding: 10px; border-bottom: 2px solid #999;">Split</th>
+                                <th style="padding: 10px; border-bottom: 2px solid #999;">Num. Examples</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td rowspan="5" style="padding: 10px; vertical-align: middle;">
+                                  <a href="https://huggingface.co/datasets/StanfordAIMI/StructUtterances" target="_blank">
+                                    🤗 StanfordAIMI/StructUtterances
+                                  </a>
+                                </td>
+                                <td style="padding: 10px; background-color: #f9f9f9;">Train</td>
+                                <td style="padding: 10px; background-color: #f9f9f9;">1,203,332</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 10px;">Validate</td>
+                                <td style="padding: 10px;">150,417</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 10px; background-color: #f9f9f9;">Test</td>
+                                <td style="padding: 10px; background-color: #f9f9f9;">150,417</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 10px;">Test Reviewed</td>
+                                <td style="padding: 10px;">1,609</td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 10px; background-color: #f9f9f9;"><strong>Total</strong></td>
+                                <td style="padding: 10px; background-color: #f9f9f9;"><strong>1,506,158</strong></td>
+                              </tr>
+                            </tbody>
+                          </table>
+               
+                          
+                    </p>
+             
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End CheXbench -->
+
+
+<!--BibTex citation -->
+<section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+        <h2 class="title">BibTeX</h2>
+        <pre><code>@article{TBD}
+          
+</code></pre>
+    </div>
+</section>
+<!--End BibTex citation -->
+
+
+<footer class="footer">
+    <div class="container">
+        <div class="columns is-centered">
+            <div class="column is-8">
+                <div class="content">
+                    <p>
+                        Last update: 2024/05. Template credited to <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+</body>
+</html>
