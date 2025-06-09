@@ -89,7 +89,7 @@
 
                             <!-- Github link -->
                             <span class="link-block">
-                                <a href="" target="_blank"
+                                <a href="https://github.com/jbdel/StructEval/tree/main" target="_blank"
                                    class="external-link button is-normal is-rounded is-dark">
                                     <span class="icon">
                                         <i class="fab fa-github"></i>
@@ -144,8 +144,9 @@
             <div class="column is-four-fifths">
                 <h2 class="title is-3">Report Generation</h2>
                 <div class="content has-text-justified">
+                  <p>We release multiple models for SRRG-Impression and SRRG-Findings. 
                     <p>
-                        <table style="width:100%; border-collapse: collapse; text-align: left; font-family: Arial, sans-serif;">
+                        <table style="font-size: 14px; width:100%; border-collapse: collapse; text-align: left; font-family: Arial, sans-serif;">
                             <thead style="background-color: #cce5ff;">
                               <tr>
                                 <th style="padding: 10px; border-bottom: 2px solid #999;">Model Family</th>
@@ -238,6 +239,85 @@
                           </table>
                           
                     </p>
+                    <p>Example usage:</p>
+                    <p>
+                      <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="font-size: 12px; margin: 0; line-height: 125%"><span style="color: #0000ff">import</span> io
+<span style="color: #0000ff">import</span> requests
+<span style="color: #0000ff">import</span> torch
+<span style="color: #0000ff">from</span> PIL <span style="color: #0000ff">import</span> Image
+<span style="color: #0000ff">from</span> transformers <span style="color: #0000ff">import</span> AutoModelForCausalLM, AutoTokenizer
+<span style="color: #0000ff">import</span> tempfile
+
+<span style="color: #008000"># step 1: Setup constants</span>
+model_name = <span style="color: #a31515">&quot;StanfordAIMI/CheXagent-2-3b-srrg-findings&quot;</span>
+dtype = torch.bfloat16
+device = <span style="color: #a31515">&quot;cuda&quot;</span>
+
+<span style="color: #008000"># step 2: Load Processor and Model</span>
+tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained(model_name, device_map=<span style="color: #a31515">&quot;auto&quot;</span>, trust_remote_code=True)
+model = model.to(dtype)
+model.eval()
+
+<span style="color: #008000"># step 3: Download image from URL, save to a local file, and prepare path list</span>
+url = <span style="color: #a31515">&quot;https://huggingface.co/IAMJB/interpret-cxr-impression-baseline/resolve/main/effusions-bibasal.jpg&quot;</span>
+resp = requests.get(url)
+resp.raise_for_status()
+
+<span style="color: #008000"># Use a NamedTemporaryFile so it lives on disk</span>
+<span style="color: #0000ff">with</span> tempfile.NamedTemporaryFile(delete=False, suffix=<span style="color: #a31515">&quot;.jpg&quot;</span>) <span style="color: #0000ff">as</span> tmpfile:
+    tmpfile.write(resp.content)
+    local_path = tmpfile.name  <span style="color: #008000"># this is a real file path on disk</span>
+
+paths = [local_path]
+
+prompt = <span style="color: #a31515">&quot;Structured Radiology Report Generation for Findings Section&quot;</span>
+<span style="color: #008000"># build the multimodal input</span>
+query = tokenizer.from_list_format(
+    [*([{<span style="color: #a31515">&quot;image&quot;</span>: img} <span style="color: #0000ff">for</span> img <span style="color: #0000ff">in</span> paths]), {<span style="color: #a31515">&quot;text&quot;</span>: prompt}]
+)
+
+<span style="color: #008000"># format as a chat conversation</span>
+conv = [
+    {<span style="color: #a31515">&quot;from&quot;</span>: <span style="color: #a31515">&quot;system&quot;</span>, <span style="color: #a31515">&quot;value&quot;</span>: <span style="color: #a31515">&quot;You are a helpful assistant.&quot;</span>},
+    {<span style="color: #a31515">&quot;from&quot;</span>: <span style="color: #a31515">&quot;human&quot;</span>, <span style="color: #a31515">&quot;value&quot;</span>: query},
+]
+
+<span style="color: #008000"># tokenize and generate</span>
+input_ids = tokenizer.apply_chat_template(
+    conv, add_generation_prompt=True, return_tensors=<span style="color: #a31515">&quot;pt&quot;</span>
+)
+output = model.generate(
+    input_ids.to(device),
+    do_sample=False,
+    num_beams=1,
+    temperature=1.0,
+    top_p=1.0,
+    use_cache=True,
+    max_new_tokens=512,
+)[0]
+
+<span style="color: #008000"># decode the “findings” text</span>
+response = tokenizer.decode(output[input_ids.size(1) : -1])
+<span style="color: #0000ff">print</span>(response)
+</pre></div>
+
+                    </p>
+                    <p>Response:</p>
+<p><!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="font-size: 12px; margin: 0; line-height: 125%">Lungs and Airways:
+  - No evidence of pneumothorax.
+  
+  Pleura:
+  - Bilateral pleural effusions.
+  
+  Cardiovascular:
+  - Cardiomegaly.
+  
+  Other:
+  - Bibasilar opacities.
+  - Mild pulmonary edema.
+  </pre></div>
+  </p>
                 </div>
             </div>
         </div>
@@ -253,7 +333,7 @@
                 <h2 class="title is-3">F1-SRR-BERT</h2>
                 <div class="content has-text-justified">
                     <p>
-                        <table style="width:100%; border-collapse: collapse; text-align: left; font-family: Arial, sans-serif;">
+                        <table style="font-size: 14px; width:100%; border-collapse: collapse; text-align: left; font-family: Arial, sans-serif;">
                             <thead style="background-color: #cce5ff;">
                               <tr>
                                 <th style="padding: 10px; border-bottom: 2px solid #999;">Model</th>
@@ -302,7 +382,7 @@
                           </table>
                           
                           
-                          <table style="width:100%; border-collapse: collapse; text-align: left; font-family: Arial, sans-serif;">
+                          <table style="font-size: 14px; width:100%; border-collapse: collapse; text-align: left; font-family: Arial, sans-serif;">
                             <thead style="background-color: #cce5ff;">
                               <tr>
                                 <th style="padding: 10px; border-bottom: 2px solid #999;">Dataset</th>
@@ -341,8 +421,97 @@
                
                           
                     </p>
-             
-                </div>
+             <p>The evaluation script of F1-SRR-BERT is available <a href="https://github.com/jbdel/StructEval/blob/main/structeval/evaluation.py" target="_blank">here</a>.</p>
+                
+            <p>Example usage:</p>
+            <p>
+              <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="font-size: 12px; margin: 0; line-height: 125%"><span style="color: #0000ff">import</span> json
+<span style="color: #0000ff">import</span> torch
+<span style="color: #0000ff">from</span> transformers <span style="color: #0000ff">import</span> BertTokenizer, BertForSequenceClassification
+<span style="color: #0000ff">from</span> datasets <span style="color: #0000ff">import</span> load_dataset
+<span style="color: #0000ff">import</span> requests
+
+<span style="color: #008000"># Configuration</span>
+MODEL_PATH = <span style="color: #a31515">&quot;StanfordAIMI/SRRG-BERT-Upper-with-Statuses&quot;</span>
+MAPPING_URL = <span style="color: #a31515">&quot;https://raw.githubusercontent.com/jbdel/StructEval/refs/heads/main/structeval/upper_with_statuses_mapping.json&quot;</span>
+MAX_LENGTH = 128
+DEVICE = torch.device(<span style="color: #a31515">&quot;cuda&quot;</span> <span style="color: #0000ff">if</span> torch.cuda.is_available() <span style="color: #0000ff">else</span> <span style="color: #a31515">&quot;cpu&quot;</span>)
+
+<span style="color: #008000"># Fetch mapping from GitHub</span>
+resp = requests.get(MAPPING_URL)
+resp.raise_for_status()
+label_map = resp.json()
+idx2label = {v: k <span style="color: #0000ff">for</span> k, v <span style="color: #0000ff">in</span> label_map.items()}
+
+<span style="color: #008000"># Load tokenizer &amp; model</span>
+tokenizer = BertTokenizer.from_pretrained(<span style="color: #a31515">&quot;microsoft/BiomedVLP-CXR-BERT-general&quot;</span>)
+model = BertForSequenceClassification.from_pretrained(MODEL_PATH, num_labels=len(label_map))
+model.to(DEVICE).eval()
+
+<span style="color: #008000"># Grab one test sentence</span>
+dataset = load_dataset(<span style="color: #a31515">&quot;StanfordAIMI/StructUtterances&quot;</span>, split=<span style="color: #a31515">&quot;test_reviewed&quot;</span>)
+sentence = dataset[35][<span style="color: #a31515">&quot;utterance&quot;</span>]
+
+<span style="color: #008000"># Tokenize and infer</span>
+inputs = tokenizer(
+    sentence,
+    padding=<span style="color: #a31515">&quot;max_length&quot;</span>,
+    truncation=True,
+    max_length=MAX_LENGTH,
+    return_tensors=<span style="color: #a31515">&quot;pt&quot;</span>
+).to(DEVICE)
+
+<span style="color: #0000ff">with</span> torch.no_grad():
+    logits = model(**inputs).logits
+    preds = (torch.sigmoid(logits)[0].cpu().numpy() &gt; 0.5).astype(int)
+
+pred_labels = [idx2label[i] <span style="color: #0000ff">for</span> i, flag <span style="color: #0000ff">in</span> enumerate(preds) <span style="color: #0000ff">if</span> flag]
+
+<span style="color: #0000ff">print</span>(f<span style="color: #a31515">&quot;Sentence: {sentence}&quot;</span>)
+<span style="color: #0000ff">print</span>(<span style="color: #a31515">&quot;Predicted labels:&quot;</span>, pred_labels)
+</pre></div>
+
+            </p>
+            <p>Response:</p>
+            <p>
+              <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="font-size: 12px; margin: 0; line-height: 125%">Sentence: Patchy consolidation in the left retrocardiac area, suggestive of atelectasis or early airspace disease.
+Predicted labels: [<span style="color: #a31515">&#39;Consolidation (Uncertain)&#39;</span>, <span style="color: #a31515">&#39;Air space opacity (Uncertain)&#39;</span>]
+</pre></div>
+
+            </p>
+
+            <p>Difference between models:</p>
+            <p>
+              <table style="font-size: 14px; border-collapse: collapse; text-align: left; font-family: Arial, sans-serif;">
+                <thead>
+                  <tr>
+                    <th>Model</th>
+                    <th>Predicted&nbsp;Labels</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>🤗 <a href="https://huggingface.co/StanfordAIMI/SRR-BERT-Leaves">StanfordAIMI/SRR-BERT-Leaves</a></td>
+                    <td>Atelectasis;<br>Air&nbsp;space&nbsp;opacity–multifocal</td>
+                  </tr>
+                  <tr>
+                    <td>🤗 <a href="https://huggingface.co/StanfordAIMI/SRR-BERT-Upper">StanfordAIMI/SRR-BERT-Upper</a></td>
+                    <td>Consolidation;<br>Air&nbsp;space&nbsp;opacity</td>
+                  </tr>
+                  <tr>
+                    <td>🤗 <a href="https://huggingface.co/StanfordAIMI/SRR-BERT-Leaves-with-Statuses">StanfordAIMI/SRR-BERT-Leaves-with-Statuses</a></td>
+                    <td>Atelectasis&nbsp;(Uncertain);<br>Air&nbsp;space&nbsp;opacity–multifocal&nbsp;(Uncertain)</td>
+                  </tr>
+                  <tr>
+                    <td>🤗 <a href="https://huggingface.co/StanfordAIMI/SRR-BERT-Upper-with-Statuses">StanfordAIMI/SRR-BERT-Upper-with-Statuses</a></td>
+                    <td>Consolidation&nbsp;(Uncertain);<br>Air&nbsp;space&nbsp;opacity&nbsp;(Uncertain)</td>
+                  </tr>
+                </tbody>
+              </table>
+              
+              
+            </p>
+            </div>
             </div>
         </div>
     </div>
@@ -354,8 +523,26 @@
 <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
         <h2 class="title">BibTeX</h2>
-        <pre><code>@article{TBD}
-          
+        <pre><code>@inproceedings{delbrouck-etal-2025-automated,
+            title     = "Automated Structured Radiology Report Generation",
+            author    = "Delbrouck, Jean-Benoit  and
+                         Xu, Justin  and
+                         Moll, Johannes  and
+                         Thomas, Alois  and
+                         Chen, Zhihong  and
+                         Ostmeier, Sophie  and
+                         Azhar, Asfandyar  and
+                         Li, Kelvin Zhenghao  and
+                         Johnston, Andrew  and
+                         Bluethgen, Christian  and
+                         Reis, Eduardo  and
+                         Muneer, Mohamed  and
+                         Varma, Maya  and
+                         Langlotz, Curtis",
+            booktitle = "Proceedings of the 63rd Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+            year      = "2025",
+            publisher = "Association for Computational Linguistics",
+        }                 
 </code></pre>
     </div>
 </section>
