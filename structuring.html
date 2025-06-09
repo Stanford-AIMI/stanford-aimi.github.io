@@ -23,7 +23,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
 
-    <title>Structuring Radiology Reports: <br>Challenging LLMs with Lightweight Models</title>
+    <title>Structuring Radiology Reports: Challenging LLMs with Lightweight Models</title>
     <link rel="icon" type="image/x-icon" href="src/static-chexagent/images/favicon.png">
     <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
@@ -53,7 +53,7 @@
                     <div class="is-size-5 publication-authors">
                         <!-- Paper authors -->
     <!-- Paper authors -->
-<span class="author-block"><a href="https://github.com/johannes2moll" target="_blank">Johannes Moll</a><sup>1,2</sup>,</span>
+<span class="author-block"><a href="https://github.com/jomoll" target="_blank">Johannes Moll</a><sup>1,2</sup>,</span>
 <span class="author-block"><a href="https://www.medizin.uni-tuebingen.de/de/das-klinikum/mitarbeiter/profil/4361" target="_blank">Louisa Fay</a><sup>1</sup>,</span>
 <span class="author-block"><a href="https://langlotzlab.stanford.edu/people/asfandyar-azhar" target="_blank">Asfandyar Azhar</a><sup>1,3</sup>,</span>
 <span class="author-block"><a href="https://scholar.google.com/citations?user=Q2SCA-sAAAAJ&hl=en" target="_blank">Sophie Ostmeier</a><sup>1</sup>,</span>
@@ -73,7 +73,7 @@
                         <div class="publication-links">
                             <!-- ArXiv abstract Link -->
                             <span class="link-block">
-                                <a href="" target="_blank"
+                                <a href="http://arxiv.org/abs/2506.00200" target="_blank"
                                    class="external-link button is-normal is-rounded is-dark">
                                     <span class="icon">
                                         <i class="ai ai-arxiv"></i>
@@ -84,7 +84,7 @@
 
                             <!-- Github link -->
                             <span class="link-block">
-                                <a href="https://github.com/johannes2moll/rad-report-structuring" target="_blank"
+                                <a href="https://github.com/jomoll/rad-report-structuring" target="_blank"
                                    class="external-link button is-normal is-rounded is-dark">
                                     <span class="icon">
                                         <i class="fab fa-github"></i>
@@ -95,7 +95,7 @@
 
                             <!-- HuggingFace link -->
                             <span class="link-block">
-                                <a href="https://huggingface.co/StanfordAIMI" target="_blank"
+                                <a href="https://huggingface.co/collections/StanfordAIMI/structuring-with-lightweight-models-683e9eb895d42e04112fad88" target="_blank"
                                    class="external-link button is-normal is-rounded is-dark">
                                     <span class="icon">
                                         <i class="fas fa-smile"></i>
@@ -122,7 +122,7 @@
                 <div class="content has-text-justified">
                     <p>
                         Radiology reports are critical for clinical decision-making but often lack a standardized format, limiting both human interpretability and machine learning (ML) applications. While large language models (LLMs) have shown strong capabilities in reformatting clinical text, their high computational requirements, lack of transparency, and data privacy concerns hinder practical deployment. To address these challenges, we explore lightweight encoder-decoder models (<300M parameters)—specifically T5 and BERT2BERT—for structuring radiology reports from the MIMIC-CXR and CheXpert Plus datasets. We benchmark these models against eight open-source LLMs (1B–70B parameters), adapted using prefix prompting, in-context learning (ICL), and low-rank adaptation (LoRA) finetuning. Our best-performing lightweight model outperforms all LLMs adapted using prompt-based techniques on a human-annotated test set. While some LoRA-finetuned LLMs achieve modest gains over the lightweight model on the Findings section (BLEU 6.4%, ROUGE-L 4.8%, BERTScore 3.6%, F1-RadGraph 1.1%, GREEN 3.6%, and F1-SRR-BERT 4.3%), these improvements come at the cost of substantially greater computational resources. For example, LLaMA-3-70B incurred more than 400 times the inference time, cost, and carbon emissions compared to the lightweight model. These results underscore the potential of lightweight, task-specific models as sustainable and privacy-preserving solutions for structuring clinical text in resource-constrained healthcare settings.                        <figure>
-                        <img src="src/static-structuring/generation2.png" width="100%" alt="Overview" class="center-image blend-img-background">
+                        <img src="src/static-structuring/structuring_example.png" width="100%" alt="Overview" class="center-image blend-img-background">
                     </figure>
                 </div>
             </div>
@@ -136,28 +136,105 @@
     <div class="container is-max-desktop">
         <div class="columns is-centered has-text-centered">
             <div class="column is-four-fifths">
-                <h2 class="title is-3">Best Lightweight Model</h2>
+                <h2 class="title is-3">Lightweight Models</h2>
                 <div class="content has-text-justified">
                     <p>
                         <table style="width:100%; border-collapse: collapse; text-align: left; font-family: Arial, sans-serif;">
                             <thead>
                               <tr>
                                 <th style="padding: 10px; font-weight: bold; vertical-align: middle;">Model</th>
+                                <th style="padding: 10px; font-weight: bold; vertical-align: middle;">Variant</th>
                                 <th style="padding: 10px; font-weight: bold; vertical-align: middle;">HuggingFace Link</th>
                               </tr>
                             <tbody>
                               <!-- BERT2BERT -->
                               <tr>
-                                <td rowspan="1" style="padding: 10px; font-weight: bold; vertical-align: middle;">BERT2BERT</td>
+                                <td rowspan="4" style="padding: 10px; font-weight: bold; vertical-align: middle;">BERT2BERT</td>
+                                <td style="padding: 10px;">RoBERTa-base</td>
                                 <td style="padding: 10px;">
-                                  <a href="https://huggingface.co/StanfordAIMI/SRR-BERT2BERT" target="_blank">
-                                    🤗 StanfordAIMI/SRR-BERT2BERT
+                                  <a href="https://huggingface.co/StanfordAIMI/SRR-BERT2BERT-RoBERTa-base" target="_blank">
+                                    🤗 StanfordAIMI/SRR-BERT2BERT-RoBERTa-base
                                   </a>
                                 </td>
                               </tr>
+                              <tr>
+                                <td style="padding: 10px;">RoBERTa-biomed</td>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/StanfordAIMI/SRR-BERT2BERT-RoBERTa-biomed" target="_blank">
+                                    🤗 StanfordAIMI/SRR-BERT2BERT-RoBERTa-biomed
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 10px;">RoBERTa-PM-M3</td>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/StanfordAIMI/SRR-BERT2BERT-RoBERTa-PM-M3" target="_blank">
+                                    🤗 StanfordAIMI/SRR-BERT2BERT-RoBERTa-PM-M3
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 10px;">RadBERT</td>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/StanfordAIMI/SRR-BERT2BERT-RadBERT" target="_blank">
+                                    🤗 StanfordAIMI/SRR-BERT2BERT-RadBERT
+                                  </a>
+                                </td>
+                              </tr>
+                              <!-- T5 -->
+                              <tr>
+                                <td rowspan="3" style="padding: 10px; font-weight: bold; vertical-align: middle;">T5</td>
+                                <td style="padding: 10px;">T5-Base</td>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/StanfordAIMI/SRR-T5-Base" target="_blank">
+                                    🤗 StanfordAIMI/SRR-T5-Base
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 10px;">Flan-T5</td>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/StanfordAIMI/SRR-T5-Flan" target="_blank">
+                                    🤗 StanfordAIMI/SRR-StanfordAIMI/SRR-T5-Flan
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td style="padding: 10px;">SciFive</td>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/StanfordAIMI/SRR-T5-SciFive" target="_blank">
+                                    🤗 StanfordAIMI/SRR-T5-SciFive
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr>
                             </tbody>
                           </table>
-                          
+                         
+                    </p>
+                </div>
+                <h2 class="title is-3">Dataset</h2>
+                <div class="content has-text-justified">
+                    <p>
+                      <table style="width:100%; border-collapse: collapse; text-align: left; font-family: Arial, sans-serif;">
+                            <thead>
+                              <tr>
+                                <th style="padding: 10px; font-weight: bold; vertical-align: middle;">Dataset</th>
+                                <th style="padding: 10px; font-weight: bold; vertical-align: middle;">HuggingFace Link</th>
+                              </tr>
+                            <tbody>
+                              <tr>
+                                <td style="padding: 10px; font-weight: bold; vertical-align: middle;">SRRG-Findings</td>
+                                <td style="padding: 10px;">
+                                  <a href="https://huggingface.co/datasets/StanfordAIMI/srrg_findings_impression" target="_blank">
+                                    🤗 StanfordAIMI/srrg_findings_impression
+                                  </a>
+                                </td>
+                              </tr>
+                              <tr>
+                            </tbody>
+                      </table>
+                            
                     </p>
                 </div>
             </div>
@@ -179,22 +256,31 @@
                     <figure>
                         <img src="src/static-structuring/benchmark.png" width="100%" alt="Results" class="center-image blend-img-background">
                     </figure>
+                    <p>
+                      The result for the LLaMA-3-70B model with LoRA finetuning is indicated with a dashed line, as this configuration was trained for only one epoch—compared to five epochs for the other models—due to computational constraints.
+                    </p>
                 </div>
             </div>
         </div>
     </div>
-
+</section>
+<!-- End Paper results -->
+ 
 <!--BibTex citation -->
 <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
         <h2 class="title">BibTeX</h2>
-        <pre><code>@article{TBD}
-          
-</code></pre>
+        <pre><code>@article{structuring-2025,
+            title={Structuring Radiology Reports: Challenging LLMs with Lightweight Models},
+            author={Moll, Johannes and Fay, Louisa and Azhar, Asfandyar and Ostmeier, Sophie and Lueth, Tim and Gatidis, Sergios and Langlotz, Curtis and Delbrouck, Jean-Benoit},
+            journal={arXiv preprint arXiv:2506.00200},
+            url={https://arxiv.org/abs/2506.00200},
+            year={2025}
+        }
+        </code></pre>
     </div>
 </section>
 <!--End BibTex citation -->
-
 
 <footer class="footer">
     <div class="container">
