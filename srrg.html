@@ -403,7 +403,7 @@ response = tokenizer.decode(output[input_ids.size(1) : -1])
                             <thead style="background-color: #cce5ff;">
                               <tr>
                                 <th style="padding: 10px; border-bottom: 2px solid #999;">Model</th>
-                                <th style="padding: 10px; border-bottom: 2px solid #999;"># Classes</th>
+                                <th style="padding: 10px; border-bottom: 2px solid #999;"># Classes (cf <a href="#ontology">ontology</a>)</th>
                                 <th style="padding: 10px; border-bottom: 2px solid #999;">Weighted Scores (P / R / F1 / Support)</th>
                               </tr>
                             </thead>
@@ -611,6 +611,92 @@ Predicted labels: [<span style="color: #a31515">&#39;Consolidation (Uncertain)&#
         }                 
 </code></pre>
     </div>
+</section>
+
+<section class="section" id="ontology">
+  <div class="container is-max-desktop content">
+    <h2 class="title">Ontology:</h2>
+    <pre><code>1. No Finding
+2. Lung Finding
+   2.1. Lung Opacity
+       2.1.1. Air space opacity
+           2.1.1.1. Diffuse air space opacity
+               2.1.1.1.1. Edema
+           2.1.1.2. Focal air space opacity
+               2.1.1.2.1. Consolidation
+                   2.1.1.2.1.1. Pneumonia
+                   2.1.1.2.1.2. Atelectasis
+                   2.1.1.2.1.3. Aspiration
+               2.1.1.2.2. Segmental collapse
+                   2.1.1.2.2.1. Lung collapse
+               2.1.1.2.3. Perihilar airspace opacity
+           2.1.1.3. Air space opacity–multifocal
+       2.1.2. Masslike opacity
+           2.1.2.1. Solitary masslike opacity
+               2.1.2.1.1. Mass/Solitary lung mass
+               2.1.2.1.2. Nodule/Solitary lung nodule
+               2.1.2.1.3. Cavitating mass with content
+           2.1.2.2. Multiple masslike opacities
+               2.1.2.2.1. Cavitating masses
+   2.2. Emphysema
+   2.3. Fibrosis
+   2.4. Pulmonary congestion
+   2.5. Hilar lymphadenopathy
+   2.6. Bronchiectasis
+3. Pleural Finding
+   3.1. Pneumothorax
+       3.1.1. Simple pneumothorax
+       3.1.2. Loculated pneumothorax
+       3.1.3. Tension pneumothorax
+   3.2. Pleural Thickening
+       3.2.1. Pleural Effusion
+           3.2.1.1. Simple pleural effusion
+           3.2.1.2. Loculated pleural effusion
+       3.2.2. Pleural scarring
+   3.3. Hydropneumothorax
+   3.4. Pleural Other
+4. Widened Cardiac Silhouette
+   4.1. Cardiomegaly
+   4.2. Pericardial effusion
+5. Mediastinal Finding
+   5.1. Mediastinal Mass
+       5.1.1. Inferior mediastinal mass
+       5.1.2. Superior mediastinal mass
+   5.2. Vascular Finding
+       5.2.1. Widened aortic contour
+           5.2.1.1. Tortuous Aorta
+       5.2.2. Calcification of the Aorta
+       5.2.3. Enlarged pulmonary artery
+   5.3. Hernia
+   5.4. Pneumomediastinum
+   5.5. Tracheal deviation
+6. Musculoskeletal Finding
+   6.1. Fracture
+       6.1.1. Acute humerus fracture
+       6.1.2. Acute rib fracture
+       6.1.3. Acute clavicle fracture
+       6.1.4. Acute scapula fracture
+       6.1.5. Compression fracture
+   6.2. Shoulder dislocation
+   6.3. Chest wall finding
+       6.3.1. Subcutaneous Emphysema
+7. Support Devices
+   7.1. Suboptimal central line
+   7.2. Suboptimal endotracheal tube
+   7.3. Suboptimal nasogastric tube
+   7.4. Suboptimal pulmonary arterial catheter
+   7.5. Pleural tube
+   7.6. PICC line
+   7.7. Port catheter
+   7.8. Pacemaker
+   7.9. Implantable defibrillator
+   7.10. LVAD
+   7.11. Intraaortic balloon pump
+8. Upper Abdominal Finding
+   8.1. Subdiaphragmatic gas
+       8.1.1. Pneumoperitoneum
+    </code></pre>
+  </div>
 </section>
 <!--End BibTex citation -->
 
