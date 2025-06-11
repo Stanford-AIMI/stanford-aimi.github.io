@@ -98,12 +98,21 @@
                                 <a href="https://huggingface.co/collections/StanfordAIMI/structuring-with-lightweight-models-683e9eb895d42e04112fad88" target="_blank"
                                    class="external-link button is-normal is-rounded is-dark">
                                     <span class="icon">
-                                        <i class="fas fa-smile"></i>
+                                        🤗
                                     </span>
-                                    <span>HuggingFace</span>
+                                    <span>Models</span>
                                 </a>
                             </span>
-
+                            <!-- HuggingFace link -->
+                            <span class="link-block">
+                                <a href="https://huggingface.co/datasets/StanfordAIMI/srrg_findings" target="_blank"
+                                   class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        🤗
+                                    </span>
+                                    <span>Dataset</span>
+                                </a>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -210,9 +219,9 @@
                               <tr>
                             </tbody>
                           </table>
-                         
+                        </p>
+                      </div>
                     </p>
-                </div>
                 <h2 class="title is-3">Dataset</h2>
                 <div class="content has-text-justified">
                     <p>
@@ -226,58 +235,105 @@
                               <tr>
                                 <td style="padding: 10px; font-weight: bold; vertical-align: middle;">SRRG-Findings</td>
                                 <td style="padding: 10px;">
-                                  <a href="https://huggingface.co/datasets/StanfordAIMI/srrg_findings_impression" target="_blank">
-                                    🤗 StanfordAIMI/srrg_findings_impression
+                                  <a href="https://huggingface.co/datasets/StanfordAIMI/srrg_findings" target="_blank">
+                                    🤗 StanfordAIMI/srrg_findings
                                   </a>
                                 </td>
                               </tr>
                               <tr>
                             </tbody>
                       </table>
-                            
                     </p>
                 </div>
-            </div>
-        </div>
-    </div>
+
+                <h2 class="title is-3">Example usage</h2>
+                <div class="content has-text-justified">
+                    <p>Requirements:</p>
+                    <p>
+                     <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="font-size: 12px; margin: 0; line-height: 125%">pip install transformers==4.44.0 torch==2.3
+                    </pre></div>
+
+                    </p>
+                      <p>
+                      <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="font-size: 12px; margin: 0; line-height: 125%"><span style="color: #0000ff">import</span> io
+<span style="color: #0000ff">import</span> torch
+<span style="color: #0000ff">from</span> transformers <span style="color: #0000ff">import</span> EncoderDecoderModel, AutoTokenizer
+
+<span style="color: #008000"># step 1: Setup</span>
+model_name = <span style="color: #a31515">&quot;StanfordAIMI/SRR-BERT2BERT-RoBERTa-base&quot;</span>
+device = torch.device(<span style="color: #a31515">&quot;cuda&quot;</span> <span style="color: #0000ff">if</span> torch.cuda.is_available() <span style="color: #0000ff">else</span> <span style="color: #a31515">&quot;cpu&quot;</span>)
+
+<span style="color: #008000"># step 2: Load Processor and Model</span>
+model = EncoderDecoderModel.from_pretrained(model_name).to(device)
+tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True, padding_side="right", use_fast=False)
+model.config.decoder_start_token_id = tokenizer.cls_token_id
+model.config.bos_token_id = tokenizer.cls_token_id
+model.eval()
+
+<span style="color: #008000"># step 3: Inference (example from MIMIC-CXR dataset)</span>
+input_text = <span style="color: #a31515">&quot;CHEST RADIOGRAPH PERFORMED ON ___  COMPARISON: Prior exam from ___.  CLINICAL HISTORY: Weakness, assess pneumonia.  FINDINGS: Frontal and lateral views of the chest were provided. Midline sternotomy wires are again noted. The heart is poorly assessed, though remains enlarged. There are at least small bilateral pleural effusions.  There may be mild interstitial edema. No pneumothorax. Bony structures are demineralized with kyphotic angulation in the lower T-spine again noted.  IMPRESSION: Limited exam with small bilateral effusions, cardiomegaly, and possible mild interstitial edema.&quot;</span>
+inputs = tokenizer(input_text, padding="max_length", truncation=True, max_length=512, return_tensors="pt")
+inputs["attention_mask"] = inputs["input_ids"].ne(tokenizer.pad_token_id)  # Add attention mask
+input_ids = inputs['input_ids'].to(device)
+attention_mask=inputs["attention_mask"].to(device)
+generated_ids = model.generate(
+    input_ids, attention_mask=attention_mask, max_new_tokens=286, min_new_tokens= 120,decoder_start_token_id=model.config.decoder_start_token_id, num_beams=5, early_stopping=True, max_length=None
+    )[0]
+decoded = tokenizer.decode(generated_ids, skip_special_tokens=True)
+<span style="color: #0000ff">print</span>(decoded)
+</pre></div>
+
+                    </p>
+                    <p>Output:</p>
+<p><!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="font-size: 12px; margin: 0; line-height: 125%">Exam Type: Chest Radiograph
+
+History: Clinical history includes weakness with a need to assess for pneumonia.
+
+Technique: Frontal and lateral views of the chest were obtained.
+
+Findings:
+Pleura:
+- Small bilateral pleural effusions.
+
+Cardiovascular:
+- Enlarged cardiac silhouette.
+
+Lungs and Airways:
+- Possible mild interstitial edema.
+- No evidence of pneumothorax.
+
+Musculoskeletal and Chest Wall:
+- Midline sternotomy wires present.
+- Bony structures show demineralization.
+- Kyphotic angulation in the lower thoracic spine.
+
+Impression:
+1. Small bilateral pleural effusions.
+2. Cardiomegaly.
+3. Possible mild interstitial edema.
+  </pre></div>
+  </p>
+  
 </section>
+                
 <!-- End Models -->
 
-<!-- Paper results -->
-<section class="section hero is-light">
-    <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-            <div class="column is-four-fifths">
-                <h2 class="title is-3">Results</h2>
-                <div class="content has-text-justified">
-                    <p>
-                        We benchmarked our best lightweight model against open-source LLMs (1B–70B parameters), adapted using prefix prompting, in-context learning (ICL), and low-rank adaptation (LoRA) finetuning. The results are summarized in the figure below:
-                    </p>
-                    <figure>
-                        <img src="src/static-structuring/benchmark.png" width="100%" alt="Results" class="center-image blend-img-background">
-                    </figure>
-                    <p>
-                      The result for the LLaMA-3-70B model with LoRA finetuning is indicated with a dashed line, as this configuration was trained for only one epoch—compared to five epochs for the other models—due to computational constraints.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Paper results -->
  
 <!--BibTex citation -->
 <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
-        <h2 class="title">BibTeX</h2>
-        <pre><code>@article{structuring-2025,
-            title={Structuring Radiology Reports: Challenging LLMs with Lightweight Models},
-            author={Moll, Johannes and Fay, Louisa and Azhar, Asfandyar and Ostmeier, Sophie and Lueth, Tim and Gatidis, Sergios and Langlotz, Curtis and Delbrouck, Jean-Benoit},
-            journal={arXiv preprint arXiv:2506.00200},
-            url={https://arxiv.org/abs/2506.00200},
-            year={2025}
-        }
-        </code></pre>
+        <h2 class="title has-text-centered">BibTeX</h2>
+        <div class="columns is-centered">
+            <div class="column is-four-fifths">
+                <pre><code>@article{structuring-2025,
+    title={Structuring Radiology Reports: Challenging LLMs with Lightweight Models},
+    author={Moll, Johannes and Fay, Louisa and Azhar, Asfandyar and Ostmeier, Sophie and Lueth, Tim and Gatidis, Sergios and Langlotz, Curtis and Delbrouck, Jean-Benoit},
+    journal={arXiv preprint arXiv:2506.00200},
+    url={https://arxiv.org/abs/2506.00200},
+    year={2025}
+}</code></pre>
+            </div>
+        </div>
     </div>
 </section>
 <!--End BibTex citation -->
