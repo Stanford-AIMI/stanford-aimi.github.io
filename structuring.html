@@ -33,6 +33,7 @@
     <link rel="stylesheet" href="src/static-chexagent/css/fontawesome.all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
     <link rel="stylesheet" href="src/static-chexagent/css/index.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/antonin-lebrard/huggingface-css@0.0.1/dist/main.min.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
@@ -98,12 +99,21 @@
                                 <a href="https://huggingface.co/collections/StanfordAIMI/structuring-with-lightweight-models-683e9eb895d42e04112fad88" target="_blank"
                                    class="external-link button is-normal is-rounded is-dark">
                                     <span class="icon">
-                                        <i class="fas fa-smile"></i>
+                                        <i class="fab fa-huggingface"></i>
                                     </span>
-                                    <span>HuggingFace</span>
+                                    <span>Models</span>
                                 </a>
                             </span>
-
+                            <!-- HuggingFace link -->
+                            <span class="link-block">
+                                <a href="https://huggingface.co/datasets/StanfordAIMI/srrg_findings" target="_blank"
+                                   class="external-link button is-normal is-rounded is-dark">
+                                    <span class="icon">
+                                        <i class="fab fa-huggingface"></i>
+                                    </span>
+                                    <span>Dataset</span>
+                                </a>
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -291,8 +301,8 @@ Impression:
                               <tr>
                                 <td style="padding: 10px; font-weight: bold; vertical-align: middle;">SRRG-Findings</td>
                                 <td style="padding: 10px;">
-                                  <a href="https://huggingface.co/datasets/StanfordAIMI/srrg_findings_impression" target="_blank">
-                                    🤗 StanfordAIMI/srrg_findings_impression
+                                  <a href="https://huggingface.co/datasets/StanfordAIMI/srrg_findings" target="_blank">
+                                    🤗 StanfordAIMI/srrg_findings
                                   </a>
                                 </td>
                               </tr>
@@ -308,28 +318,6 @@ Impression:
 </section>
 <!-- End Models -->
 
-<!-- Paper results -->
-<section class="section hero is-light">
-    <div class="container is-max-desktop">
-        <div class="columns is-centered has-text-centered">
-            <div class="column is-four-fifths">
-                <h2 class="title is-3">Results</h2>
-                <div class="content has-text-justified">
-                    <p>
-                        We benchmarked our best lightweight model against open-source LLMs (1B–70B parameters), adapted using prefix prompting, in-context learning (ICL), and low-rank adaptation (LoRA) finetuning. The results are summarized in the figure below:
-                    </p>
-                    <figure>
-                        <img src="src/static-structuring/benchmark.png" width="100%" alt="Results" class="center-image blend-img-background">
-                    </figure>
-                    <p>
-                      The result for the LLaMA-3-70B model with LoRA finetuning is indicated with a dashed line, as this configuration was trained for only one epoch—compared to five epochs for the other models—due to computational constraints.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-<!-- End Paper results -->
  
 <!--BibTex citation -->
 <section class="section" id="BibTeX">
