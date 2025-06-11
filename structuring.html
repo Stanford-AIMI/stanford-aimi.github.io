@@ -212,84 +212,69 @@
                           </table>
                     
                     </p>
-                </div>
+                
                 <p>Example usage:</p>
                     <p>
                       <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="font-size: 12px; margin: 0; line-height: 125%"><span style="color: #0000ff">import</span> io
-<span style="color: #0000ff">import</span> requests
 <span style="color: #0000ff">import</span> torch
-<span style="color: #0000ff">from</span> PIL <span style="color: #0000ff">import</span> Image
-<span style="color: #0000ff">from</span> transformers <span style="color: #0000ff">import</span> AutoModelForCausalLM, AutoTokenizer
-<span style="color: #0000ff">import</span> tempfile
+<span style="color: #0000ff">from</span> transformers <span style="color: #0000ff">import</span> EncoderDecoderModel, AutoTokenizer
 
-<span style="color: #008000"># step 1: Setup constants</span>
-model_name = <span style="color: #a31515">&quot;StanfordAIMI/CheXagent-2-3b-srrg-findings&quot;</span>
-dtype = torch.bfloat16
-device = <span style="color: #a31515">&quot;cuda&quot;</span>
+<span style="color: #008000"># step 1: Setup</span>
+model_name = <span style="color: #a31515">&quot;StanfordAIMI/SRR-BERT2BERT-RoBERTa-base&quot;</span>
+device = torch.device(<span style="color: #a31515">&quot;cuda&quot;</span> <span style="color: #0000ff">if</span> torch.cuda.is_available() <span style="color: #0000ff">else</span> <span style="color: #a31515">&quot;cpu&quot;</span>)
 
 <span style="color: #008000"># step 2: Load Processor and Model</span>
-tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
-model = AutoModelForCausalLM.from_pretrained(model_name, device_map=<span style="color: #a31515">&quot;auto&quot;</span>, trust_remote_code=True)
-model = model.to(dtype)
+model = EncoderDecoderModel.from_pretrained(model_name).to(device)
+tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True, padding_side="right", use_fast=False)
+model.config.decoder_start_token_id = tokenizer.cls_token_id
+model.config.bos_token_id = tokenizer.cls_token_id
 model.eval()
 
-<span style="color: #008000"># step 3: Download image from URL, save to a local file, and prepare path list</span>
-url = <span style="color: #a31515">&quot;https://huggingface.co/IAMJB/interpret-cxr-impression-baseline/resolve/main/effusions-bibasal.jpg&quot;</span>
-resp = requests.get(url)
-resp.raise_for_status()
-
-<span style="color: #008000"># Use a NamedTemporaryFile so it lives on disk</span>
-<span style="color: #0000ff">with</span> tempfile.NamedTemporaryFile(delete=False, suffix=<span style="color: #a31515">&quot;.jpg&quot;</span>) <span style="color: #0000ff">as</span> tmpfile:
-    tmpfile.write(resp.content)
-    local_path = tmpfile.name  <span style="color: #008000"># this is a real file path on disk</span>
-
-paths = [local_path]
-
-prompt = <span style="color: #a31515">&quot;Structured Radiology Report Generation for Findings Section&quot;</span>
-<span style="color: #008000"># build the multimodal input</span>
-query = tokenizer.from_list_format(
-    [*([{<span style="color: #a31515">&quot;image&quot;</span>: img} <span style="color: #0000ff">for</span> img <span style="color: #0000ff">in</span> paths]), {<span style="color: #a31515">&quot;text&quot;</span>: prompt}]
-)
-
-<span style="color: #008000"># format as a chat conversation</span>
-conv = [
-    {<span style="color: #a31515">&quot;from&quot;</span>: <span style="color: #a31515">&quot;system&quot;</span>, <span style="color: #a31515">&quot;value&quot;</span>: <span style="color: #a31515">&quot;You are a helpful assistant.&quot;</span>},
-    {<span style="color: #a31515">&quot;from&quot;</span>: <span style="color: #a31515">&quot;human&quot;</span>, <span style="color: #a31515">&quot;value&quot;</span>: query},
-]
+<span style="color: #008000"># step 3: Inference (example from MIMIC-CXR dataset)</span>
+input_text = <span style="color: #a31515">&quot;CHEST RADIOGRAPH PERFORMED ON ___  COMPARISON: Prior exam from ___.  CLINICAL HISTORY: Weakness, assess pneumonia.  FINDINGS: Frontal and lateral views of the chest were provided. Midline sternotomy wires are again noted. The heart is poorly assessed, though remains enlarged. There are at least small bilateral pleural effusions.  There may be mild interstitial edema. No pneumothorax. Bony structures are demineralized with kyphotic angulation in the lower T-spine again noted.  IMPRESSION: Limited exam with small bilateral effusions, cardiomegaly, and possible mild interstitial edema.&quot;</span>
 
 <span style="color: #008000"># tokenize and generate</span>
-input_ids = tokenizer.apply_chat_template(
-    conv, add_generation_prompt=True, return_tensors=<span style="color: #a31515">&quot;pt&quot;</span>
-)
-output = model.generate(
-    input_ids.to(device),
-    do_sample=False,
-    num_beams=1,
-    temperature=1.0,
-    top_p=1.0,
-    use_cache=True,
-    max_new_tokens=512,
-)[0]
+inputs = tokenizer(input_text, padding="max_length", truncation=True, max_length=512, return_tensors="pt")
+inputs["attention_mask"] = inputs["input_ids"].ne(tokenizer.pad_token_id)  # Add attention mask
+input_ids = inputs['input_ids'].to(device)
+attention_mask=inputs["attention_mask"].to(device)
+generated_ids = model.generate(
+    input_ids, attention_mask=attention_mask, max_new_tokens=286, min_new_tokens= 120,decoder_start_token_id=model.config.decoder_start_token_id, num_beams=5, early_stopping=True, max_length=None
+    )[0]
 
-<span style="color: #008000"># decode the “findings” text</span>
-response = tokenizer.decode(output[input_ids.size(1) : -1])
-<span style="color: #0000ff">print</span>(response)
-</pre></div>
+<span style="color: #008000"># decode and print structured report</span>
+decoded = tokenizer.decode(generated_ids, skip_special_tokens=True)
+<span style="color: #0000ff">print</span>(decoded)
+
 
                     </p>
-                    <p>Response:</p>
-<p><!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="font-size: 12px; margin: 0; line-height: 125%">Lungs and Airways:
-  - No evidence of pneumothorax.
-  
-  Pleura:
-  - Bilateral pleural effusions.
-  
-  Cardiovascular:
-  - Cardiomegaly.
-  
-  Other:
-  - Bibasilar opacities.
-  - Mild pulmonary edema.
+                    <p>Output:</p>
+<p><!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="font-size: 12px; margin: 0; line-height: 125%">Exam Type: Chest Radiograph
+
+History: Clinical history includes weakness with a need to assess for pneumonia.
+
+Technique: Frontal and lateral views of the chest were obtained.
+
+Findings:
+Pleura:
+- Small bilateral pleural effusions.
+
+Cardiovascular:
+- Enlarged cardiac silhouette.
+
+Lungs and Airways:
+- Possible mild interstitial edema.
+- No evidence of pneumothorax.
+
+Musculoskeletal and Chest Wall:
+- Midline sternotomy wires present.
+- Bony structures show demineralization.
+- Kyphotic angulation in the lower thoracic spine.
+
+Impression:
+1. Small bilateral pleural effusions.
+2. Cardiomegaly.
+3. Possible mild interstitial edema.
   </pre></div>
   </p>
                 </div>
