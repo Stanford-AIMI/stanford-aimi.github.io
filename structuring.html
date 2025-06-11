@@ -210,9 +210,93 @@
                               <tr>
                             </tbody>
                           </table>
-                         
+                    
                     </p>
                 </div>
+                <p>Example usage:</p>
+                    <p>
+                      <!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="font-size: 12px; margin: 0; line-height: 125%"><span style="color: #0000ff">import</span> io
+<span style="color: #0000ff">import</span> requests
+<span style="color: #0000ff">import</span> torch
+<span style="color: #0000ff">from</span> PIL <span style="color: #0000ff">import</span> Image
+<span style="color: #0000ff">from</span> transformers <span style="color: #0000ff">import</span> AutoModelForCausalLM, AutoTokenizer
+<span style="color: #0000ff">import</span> tempfile
+
+<span style="color: #008000"># step 1: Setup constants</span>
+model_name = <span style="color: #a31515">&quot;StanfordAIMI/CheXagent-2-3b-srrg-findings&quot;</span>
+dtype = torch.bfloat16
+device = <span style="color: #a31515">&quot;cuda&quot;</span>
+
+<span style="color: #008000"># step 2: Load Processor and Model</span>
+tokenizer = AutoTokenizer.from_pretrained(model_name, trust_remote_code=True)
+model = AutoModelForCausalLM.from_pretrained(model_name, device_map=<span style="color: #a31515">&quot;auto&quot;</span>, trust_remote_code=True)
+model = model.to(dtype)
+model.eval()
+
+<span style="color: #008000"># step 3: Download image from URL, save to a local file, and prepare path list</span>
+url = <span style="color: #a31515">&quot;https://huggingface.co/IAMJB/interpret-cxr-impression-baseline/resolve/main/effusions-bibasal.jpg&quot;</span>
+resp = requests.get(url)
+resp.raise_for_status()
+
+<span style="color: #008000"># Use a NamedTemporaryFile so it lives on disk</span>
+<span style="color: #0000ff">with</span> tempfile.NamedTemporaryFile(delete=False, suffix=<span style="color: #a31515">&quot;.jpg&quot;</span>) <span style="color: #0000ff">as</span> tmpfile:
+    tmpfile.write(resp.content)
+    local_path = tmpfile.name  <span style="color: #008000"># this is a real file path on disk</span>
+
+paths = [local_path]
+
+prompt = <span style="color: #a31515">&quot;Structured Radiology Report Generation for Findings Section&quot;</span>
+<span style="color: #008000"># build the multimodal input</span>
+query = tokenizer.from_list_format(
+    [*([{<span style="color: #a31515">&quot;image&quot;</span>: img} <span style="color: #0000ff">for</span> img <span style="color: #0000ff">in</span> paths]), {<span style="color: #a31515">&quot;text&quot;</span>: prompt}]
+)
+
+<span style="color: #008000"># format as a chat conversation</span>
+conv = [
+    {<span style="color: #a31515">&quot;from&quot;</span>: <span style="color: #a31515">&quot;system&quot;</span>, <span style="color: #a31515">&quot;value&quot;</span>: <span style="color: #a31515">&quot;You are a helpful assistant.&quot;</span>},
+    {<span style="color: #a31515">&quot;from&quot;</span>: <span style="color: #a31515">&quot;human&quot;</span>, <span style="color: #a31515">&quot;value&quot;</span>: query},
+]
+
+<span style="color: #008000"># tokenize and generate</span>
+input_ids = tokenizer.apply_chat_template(
+    conv, add_generation_prompt=True, return_tensors=<span style="color: #a31515">&quot;pt&quot;</span>
+)
+output = model.generate(
+    input_ids.to(device),
+    do_sample=False,
+    num_beams=1,
+    temperature=1.0,
+    top_p=1.0,
+    use_cache=True,
+    max_new_tokens=512,
+)[0]
+
+<span style="color: #008000"># decode the “findings” text</span>
+response = tokenizer.decode(output[input_ids.size(1) : -1])
+<span style="color: #0000ff">print</span>(response)
+</pre></div>
+
+                    </p>
+                    <p>Response:</p>
+<p><!-- HTML generated using hilite.me --><div style="background: #ffffff; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;"><pre style="font-size: 12px; margin: 0; line-height: 125%">Lungs and Airways:
+  - No evidence of pneumothorax.
+  
+  Pleura:
+  - Bilateral pleural effusions.
+  
+  Cardiovascular:
+  - Cardiomegaly.
+  
+  Other:
+  - Bibasilar opacities.
+  - Mild pulmonary edema.
+  </pre></div>
+  </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
                 <h2 class="title is-3">Dataset</h2>
                 <div class="content has-text-justified">
                     <p>
